@@ -26,19 +26,19 @@ in the RIO area.
 
 3.Hough transform stage; In this stage using the hough transform algo. the pipeline will take the output of ROI stage and try to construct lines from the edge points. 
 
-4. Belending the detected lane lines with original stage; In this stage the pipeline will belend the detected lane lines in the hough transform stage with the original image.
+4.Belending the detected lane lines with original stage; In this stage the pipeline will belend the detected lane lines in the hough transform stage with the original image.
 
-5. Identifying the full extent of the detected lane lines stage; In this stage the pipeline will take the output of the 3rd stage and produce a full extended lane line start from the bottom of the image to the top in the ROI area.
+5.Identifying the full extent of the detected lane lines stage; In this stage the pipeline will take the output of the 3rd stage and produce a full extended lane line start from the bottom of the image to the top in the ROI area.
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function to examine the slope value , slope direction and X-axis position for each line detected in the Hough transform stage to assign the line to it's corresponding lane segment "Right Lane segment or Left Lane segment".
 
 The slope threshold, slope direction and the X-axis Threshold are pre-calculated using the below strategy:
 
-  1.The slope threshold values are calculated by defining a threshold angle range for the lines 20 < line angle > 45 degree, So the lines out of this range will be neglected and not assigned to any segment.
+	1.The slope threshold values are calculated by defining a threshold angle range for the lines 20 < line angle > 45 degree, So the lines out of this range will be neglected and not assigned to any segment.
   
-  2.The slope direction means, If the slope is negative so it belongs to the left lane segment and if it is positive so it belongs to the right lane segment. 
+	2.The slope direction means, If the slope is negative so it belongs to the left lane segment and if it is positive so it belongs to the right lane segment. 
   
-3.The X-threshold is the middle of the image which is 500, So if the line x coordinates > 500 so the line is belonging to the right lane segment and if the x < 500 so the line is belonging to the left lane segment.
+	3.The X-threshold is the middle of the image which is 500, So if the line x coordinates > 500 so the line is belonging to the right lane segment and if the x < 500 so the line is belonging to the left lane segment.
 
 Using these three threshold combined together the pipeline can assigned the detected lines to their corresponding lane segment.
 
